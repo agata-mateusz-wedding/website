@@ -1,0 +1,825 @@
+$(document).ready(function () {
+
+    /***************** Waypoints ******************/
+
+    $('.wp1').waypoint(function () {
+        $('.wp1').addClass('animated fadeInLeft');
+    }, {
+        offset: '75%'
+    });
+    $('.wp2').waypoint(function () {
+        $('.wp2').addClass('animated fadeInRight');
+    }, {
+        offset: '75%'
+    });
+    $('.wp3').waypoint(function () {
+        $('.wp3').addClass('animated fadeInLeft');
+    }, {
+        offset: '75%'
+    });
+    $('.wp4').waypoint(function () {
+        $('.wp4').addClass('animated fadeInRight');
+    }, {
+        offset: '75%'
+    });
+    $('.wp5').waypoint(function () {
+        $('.wp5').addClass('animated fadeInLeft');
+    }, {
+        offset: '75%'
+    });
+    $('.wp6').waypoint(function () {
+        $('.wp6').addClass('animated fadeInRight');
+    }, {
+        offset: '75%'
+    });
+    $('.wp7').waypoint(function () {
+        $('.wp7').addClass('animated fadeInUp');
+    }, {
+        offset: '75%'
+    });
+    $('.wp8').waypoint(function () {
+        $('.wp8').addClass('animated fadeInLeft');
+    }, {
+        offset: '75%'
+    });
+    $('.wp9').waypoint(function () {
+        $('.wp9').addClass('animated fadeInRight');
+    }, {
+        offset: '75%'
+    });
+
+    /***************** Initiate Flexslider ******************/
+    $('.flexslider').flexslider({
+        animation: "slide"
+    });
+
+    /***************** Initiate Fancybox ******************/
+
+    $('.single_image').fancybox({
+        padding: 4
+    });
+
+    $('.fancybox').fancybox({
+        padding: 4,
+        width: 1000,
+        height: 800
+    });
+
+    /***************** Tooltips ******************/
+    $('[data-toggle="tooltip"]').tooltip();
+
+    /***************** Nav Transformicon ******************/
+
+    /* When user clicks the Icon */
+    $('.nav-toggle').click(function () {
+        $(this).toggleClass('active');
+        $('.header-nav').toggleClass('open');
+        event.preventDefault();
+    });
+    /* When user clicks a link */
+    $('.header-nav li a').click(function () {
+        $('.nav-toggle').toggleClass('active');
+        $('.header-nav').toggleClass('open');
+
+    });
+
+    /***************** Header BG Scroll ******************/
+
+    $(function () {
+        $(window).scroll(function () {
+            var scroll = $(window).scrollTop();
+
+            if (scroll >= 20) {
+                $('section.navigation').addClass('fixed');
+                $('header').css({
+                    "border-bottom": "none",
+                    "padding": "35px 0"
+                });
+                $('header .member-actions').css({
+                    "top": "31px",
+                });
+                $('header .navicon').css({
+                    "top": "34px",
+                });
+            } else {
+                $('section.navigation').removeClass('fixed');
+                $('header').css({
+                    "border-bottom": "solid 1px rgba(255, 255, 255, 0.2)",
+                    "padding": "50px 0"
+                });
+                $('header .member-actions').css({
+                    "top": "45px",
+                });
+                $('header .navicon').css({
+                    "top": "48px",
+                });
+            }
+        });
+    });
+    /***************** Smooth Scrolling ******************/
+
+    $(function () {
+
+        $('a[href*=#]:not([href=#])').click(function () {
+            if (location.pathname.replace(/^\//, '') === this.pathname.replace(/^\//, '') && location.hostname === this.hostname) {
+
+                var target = $(this.hash);
+                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                if (target.length) {
+                    $('html,body').animate({
+                        scrollTop: target.offset().top - 90
+                    }, 2000);
+                    return false;
+                }
+            }
+        });
+
+    });
+
+    /********************** Social Share buttons ***********************/
+    var share_bar = document.getElementsByClassName('share-bar');
+    var po = document.createElement('script');
+    po.type = 'text/javascript';
+    po.async = true;
+    po.src = 'https://apis.google.com/js/platform.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(po, s);
+
+    for (var i = 0; i < share_bar.length; i++) {
+        var html = '<iframe allowtransparency="true" frameborder="0" scrolling="no"' +
+            'src="https://platform.twitter.com/widgets/tweet_button.html?url=' + encodeURIComponent(window.location) + '&amp;text=' + encodeURIComponent(document.title) + '&amp;via=ramswarooppatra&amp;hashtags=ramandantara&amp;count=horizontal"' +
+            'style="width:105px; height:21px;">' +
+            '</iframe>' +
+
+            '<iframe src="//www.facebook.com/plugins/like.php?href=' + encodeURIComponent(window.location) + '&amp;width&amp;layout=button_count&amp;action=like&amp;show_faces=false&amp;share=true&amp;height=21&amp;appId=101094500229731&amp;width=150" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:150px; height:21px;" allowTransparency="true"></iframe>' +
+
+            '<div class="g-plusone" data-size="medium"></div>';
+
+        // '<iframe src="https://plusone.google.com/_/+1/fastbutton?bsv&amp;size=medium&amp;url=' + encodeURIComponent(window.location) + '" allowtransparency="true" frameborder="0" scrolling="no" title="+1" style="width:105px; height:21px;"></iframe>';
+
+        share_bar[i].innerHTML = html;
+        share_bar[i].style.display = 'inline-block';
+    }
+
+    /********************** Embed youtube video *********************/
+    $('.player').YTPlayer();
+
+
+    /********************** Toggle Map Content **********************/
+    $('#btn-show-map').click(function () {
+        $('#map-content').toggleClass('toggle-map-content');
+        $('#btn-show-content').toggleClass('toggle-map-content');
+    });
+    $('#btn-show-content').click(function () {
+        $('#map-content').toggleClass('toggle-map-content');
+        $('#btn-show-content').toggleClass('toggle-map-content');
+    });
+    $('#btn-confirm').click(function () {
+        $('#people-amount').toggleClass('toggle-map-content');
+        $('#people-form').toggleClass('toggle-map-content');
+        var n_participants = $('#n-participants').val();
+		var tag_to_append = $('<div class="row"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-user"></i><input name="name'+(1)+'" class=""placeholder="Full name '+(1)+'"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-spoon"></i><input type="text" name="dietary_restrictions'+(1)+'" class=""placeholder="Dietary restrictions"required></div></div></div><div class="row"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-shield"></i><input type="text" name="sword_tournament'+(1)+'" class=""placeholder="Enter sword tournament? (y/n)"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-music"></i><input type="text" name="song'+(1)+'" class="" placeholder="Song for karaoke"></div></div></div>');
+		for(t=0; t<n_participants; t++){
+			$("#multiple-participants").append(tag_to_append);
+            tag_to_append = $('<div class="row" style="margin-top:40px"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-user"></i><input name="name'+(t+2)+'" class=""placeholder="Full name '+(t+2)+'"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-spoon"></i><input type="text" name="dietary_restrictions'+(t+2)+'" class=""placeholder="Dietary restrictions"required></div></div></div><div class="row"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-shield"></i><input type="text" name="sword_tournament'+(t+2)+'" class=""placeholder="Enter sword tournament? (y/n)"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-music"></i><input type="text" name="song'+(t+2)+'" class="" placeholder="Song for karaoke"></div></div></div>');
+		}
+    });
+
+    $('#btn-confirm-ita').click(function () {
+        $('#people-amount-ita').toggleClass('toggle-map-content');
+        $('#people-form-ita').toggleClass('toggle-map-content');
+        var n_participants = $('#n-participants-ita').val();
+		var tag_to_append = $('<div class="row"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-user"></i><input name="name'+(1)+'" class=""placeholder="Nome completo '+(1)+'"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-spoon"></i><input type="text" name="dietary_restrictions'+(1)+'" class=""placeholder="Esigenze alimentari"required></div></div></div><div class="row"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-shield"></i><input type="text" name="sword_tournament'+(1)+'" class=""placeholder="Partecipi al torneo di spada?"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-music"></i><input type="text" name="song'+(1)+'" class="" placeholder="Canzone per karaoke"></div></div></div>');
+		for(t=0; t<n_participants; t++){
+			$("#multiple-participants-ita").append(tag_to_append);
+            tag_to_append = $('<div class="row" style="margin-top:40px"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-user"></i><input name="name'+(t+2)+'" class=""placeholder="Nome completo '+(t+2)+'"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-spoon"></i><input type="text" name="dietary_restrictions'+(t+2)+'" class=""placeholder="Esigenze alimentari"required></div></div></div><div class="row"><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-shield"></i><input type="text" name="sword_tournament'+(t+2)+'" class=""placeholder="Partecipi al torneo di spada?"required></div></div><div class="col-md-6 col-sm-6"><div class="form-input-group"><i class="fa fa-music"></i><input type="text" name="song'+(t+2)+'" class="" placeholder="Canzone per karaoke"></div></div></div>');
+		}
+    });
+
+    /********************** Flags Buttons **********************/
+    $('.ita-flag').click(function () {
+        $('.eng-text').toggleClass('language-hidden');
+        $('.ita-text').toggleClass('language-hidden');
+        $('#ita-flag').toggleClass('language-hidden');
+        $('#eng-flag').toggleClass('language-hidden');
+        $('#add-to-cal-ita label').text("Aggiungi al tuo calendario");
+        if($(".nav-toggle-ita").hasClass("active")){
+            $(".nav-toggle-ita").toggleClass("active")
+        }
+    });
+
+    $('.eng-flag').click(function () {
+        $('.ita-text').toggleClass('language-hidden');
+        $('.eng-text').toggleClass('language-hidden');
+        $('#ita-flag').toggleClass('language-hidden');
+        $('#eng-flag').toggleClass('language-hidden');
+        if($(".nav-toggle-eng").hasClass("active")){
+            $(".nav-toggle-eng").toggleClass("active")
+        }
+    });
+
+    /********************** Toggle Programme Sections **********************/
+    $('#ceremony').click(function(){
+        if( $("#txt-ceremony").css('display') == 'none') {
+            $('#txt-ceremony').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-ceremony').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-ceremony').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-ceremony').attr('class', 'fa fa-angle-down');
+        }
+    });
+    $('#buffet').click(function(){
+        if( $("#txt-buffet").css('display') == 'none') {
+            $('#txt-buffet').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-buffet').attr('class', 'fa fa-angle-up');
+            
+        }
+        else{
+            $('#txt-buffet').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-buffet').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#aperitif').click(function(){
+        if( $("#txt-aperitif").css('display') == 'none') {
+            $('#txt-aperitif').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-aperitif').attr('class', 'fa fa-angle-up');
+            
+        }
+        else{
+            $('#txt-aperitif').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-aperitif').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#lunch').click(function(){
+        if( $("#txt-lunch").css('display') == 'none') {
+            $('#txt-lunch').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-lunch').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-lunch').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-lunch').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#medieval').click(function(){
+        if( $("#txt-medieval").css('display') == 'none') {
+            $('#txt-medieval').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-medieval').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-medieval').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-medieval').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#dinner').click(function(){
+        if( $("#txt-dinner").css('display') == 'none') {
+            $('#txt-dinner').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-dinner').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-dinner').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-dinner').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#dj').click(function(){
+        if( $("#txt-dj").css('display') == 'none') {
+            $('#txt-dj').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-dj').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-dj').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-dj').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#ceremony-ita').click(function(){
+        if( $("#txt-ceremony-ita").css('display') == 'none') {
+            $('#txt-ceremony-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-ceremony-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-ceremony-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-ceremony-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#buffet-ita').click(function(){
+        if( $("#txt-buffet-ita").css('display') == 'none') {
+            $('#txt-buffet-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-buffet-ita').attr('class', 'fa fa-angle-up');
+            
+        }
+        else{
+            $('#txt-buffet-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-buffet-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#aperitif-ita').click(function(){
+        if( $("#txt-aperitif-ita").css('display') == 'none') {
+            $('#txt-aperitif-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-aperitif-ita').attr('class', 'fa fa-angle-up');
+            
+        }
+        else{
+            $('#txt-aperitif-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-aperitif-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#lunch-ita').click(function(){
+        if( $("#txt-lunch-ita").css('display') == 'none') {
+            $('#txt-lunch-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-lunch-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-lunch-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-lunch-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#medieval-ita').click(function(){
+        if( $("#txt-medieval-ita").css('display') == 'none') {
+            $('#txt-medieval-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-medieval-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-medieval-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-medieval-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#dinner-ita').click(function(){
+        if( $("#txt-dinner-ita").css('display') == 'none') {
+            $('#txt-dinner-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-dinner-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-dinner-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-dinner-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#dj-ita').click(function(){
+        if( $("#txt-dj-ita").css('display') == 'none') {
+            $('#txt-dj-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-dj-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#txt-dj-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-dj-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    $('#animals-section').click(function(){
+        if( $("#animals-text").css('display') == 'none') {
+            $('#animals-text').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-animals-section').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#animals-text').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-animals-section').attr('class', 'fa fa-angle-down');
+        }
+    });
+    $('#animals-section-mobile').click(function(){
+        if( $("#animals-text-mobile").css('display') == 'none') {
+            $('#animals-text-mobile').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-animals-section-mobile').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#animals-text-mobile').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-animals-section-mobile').attr('class', 'fa fa-angle-down');
+        }
+    });
+    $('#animals-section-ita').click(function(){
+        if( $("#animals-text-ita").css('display') == 'none') {
+            $('#animals-text-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-animals-section-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#animals-text-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-animals-section-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+    $('#animals-section-mobile-ita').click(function(){
+        if( $("#animals-text-mobile-ita").css('display') == 'none') {
+            $('#animals-text-mobile-ita').css({"visibility":"visible",
+                                    "display":"inline-block"});
+            $('#arrow-animals-section-mobile-ita').attr('class', 'fa fa-angle-up');
+        }
+        else{
+            $('#animals-text-mobile-ita').css({"visibility":"hidden",
+                                    "display":"none"});
+            $('#arrow-animals-section-mobile-ita').attr('class', 'fa fa-angle-down');
+        }
+    });
+
+    /********************** Add to Calendar **********************/
+    var myCalendar = createCalendar({
+        options: {
+            class: '',
+            // You can pass an ID. If you don't, one will be generated for you
+            id: ''
+        },
+        data: {
+            // Event title
+            title: "Caterina and Daniele's Wedding",
+
+            // Event start date
+            start: new Date('Jun 8, 2024 10:30'),
+
+            // Event duration (IN MINUTES)
+            // duration: 120,
+
+            // You can also choose to set an end time
+            // If an end time is set, this will take precedence over duration
+            end: new Date('Jun 9, 2024 01:00'),
+
+            // Event Address
+            address: 'Via Gagliardi 1, Mestre (Ve)',
+
+            // Event Description
+            description: "We can't wait to see you!"
+        }
+    });
+
+    var myCalendarIta = createCalendar({
+        options: {
+            class: '',
+            // You can pass an ID. If you don't, one will be generated for you
+            id: ''
+        },
+        data: {
+            // Event title
+            title: "Matrimonio di Caterina and Daniele",
+
+            // Event start date
+            start: new Date('Jun 8, 2024 10:30'),
+
+            // Event duration (IN MINUTES)
+            // duration: 120,
+
+            // You can also choose to set an end time
+            // If an end time is set, this will take precedence over duration
+            end: new Date('Jun 9, 2024 01:00'),
+
+            // Event Address
+            address: 'Via Gagliardi 1, Mestre (Ve)',
+
+            // Event Description
+            description: "Ti aspettiamo!"
+        }
+    });
+
+    $('#add-to-cal').html(myCalendar);
+    $('#add-to-cal-ita').html(myCalendarIta);
+
+
+    /********************** RSVP **********************/
+    $('#rsvp-form').on('submit', function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+
+        $('#alert-wrapper').html(alert_markup('info', '<strong>Just a sec!</strong> We are saving your details.'));
+
+        if (MD5($('#invite_code').val()) !== 'bb0efea553d080b06053dc948148a8fe') {
+            $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> Your invite code is incorrect.'));
+        } else {
+            $.post('https://script.google.com/macros/s/AKfycbxhKClIcfNLlhJF2wymeJc4Gh4CygOoD4bx88w59ALeLXoUXNfY7hR1UKwOCkJ7fWLD/exec', data)
+                .done(function (data) {
+                    console.log(data);
+                    if (data.result === "error") {
+                        $('#alert-wrapper').html(alert_markup('danger', data.message));
+                    } else {
+                        $('#alert-wrapper').html('');
+                        $('#rsvp-modal').modal('show');
+                    }
+                })
+                .fail(function (data) {
+                    console.log(data);
+                    $('#alert-wrapper').html(alert_markup('danger', '<strong>Sorry!</strong> There is some issue with the server. '));
+                });
+        }
+    });
+
+    $('#rsvp-form-ita').on('submit', function (e) {
+        e.preventDefault();
+        var data = $(this).serialize();
+
+        $('#alert-wrapper-ita').html(alert_markup('info', '<strong>Solo un secondo!</strong> Stiamo salvando le tue informazioni.'));
+
+        if (MD5($('#invite_code-ita').val()) !== 'bb0efea553d080b06053dc948148a8fe') {
+            $('#alert-wrapper-ita').html(alert_markup('danger', '<strong>Scusa!</strong> Il tuo codice invito non è corretto.'));
+        } else {
+            $.post('https://script.google.com/macros/s/AKfycbxhKClIcfNLlhJF2wymeJc4Gh4CygOoD4bx88w59ALeLXoUXNfY7hR1UKwOCkJ7fWLD/exec', data)
+                .done(function (data) {
+                    console.log(data);
+                    if (data.result === "error") {
+                        $('#alert-wrapper-ita').html(alert_markup('danger', data.message));
+                    } else {
+                        $('#alert-wrapper-ita').html('');
+                        $('#rsvp-modal-ita').modal('show');
+                    }
+                })
+                .fail(function (data) {
+                    console.log(data);
+                    $('#alert-wrapper-ita').html(alert_markup('danger', '<strong>Ci scusiamo!</strong> Ci sono problemi con il server. '));
+                });
+        }
+    });
+
+});
+
+/********************** Extras **********************/
+
+// Google map
+function initMap() {
+    var location = {lat: 22.5932759, lng: 88.27027720000001};
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 15,
+        center: location,
+        scrollwheel: false
+    });
+
+    var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+}
+
+function initBBSRMap() {
+    var la_fiesta = {lat: 20.305826, lng: 85.85480189999998};
+    var map = new google.maps.Map(document.getElementById('map-canvas'), {
+        zoom: 15,
+        center: la_fiesta,
+        scrollwheel: false
+    });
+
+    var marker = new google.maps.Marker({
+        position: la_fiesta,
+        map: map
+    });
+}
+
+// alert_markup
+function alert_markup(alert_type, msg) {
+    return '<div class="alert alert-' + alert_type + '" role="alert">' + msg + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span>&times;</span></button></div>';
+}
+
+// MD5 Encoding
+var MD5 = function (string) {
+
+    function RotateLeft(lValue, iShiftBits) {
+        return (lValue << iShiftBits) | (lValue >>> (32 - iShiftBits));
+    }
+
+    function AddUnsigned(lX, lY) {
+        var lX4, lY4, lX8, lY8, lResult;
+        lX8 = (lX & 0x80000000);
+        lY8 = (lY & 0x80000000);
+        lX4 = (lX & 0x40000000);
+        lY4 = (lY & 0x40000000);
+        lResult = (lX & 0x3FFFFFFF) + (lY & 0x3FFFFFFF);
+        if (lX4 & lY4) {
+            return (lResult ^ 0x80000000 ^ lX8 ^ lY8);
+        }
+        if (lX4 | lY4) {
+            if (lResult & 0x40000000) {
+                return (lResult ^ 0xC0000000 ^ lX8 ^ lY8);
+            } else {
+                return (lResult ^ 0x40000000 ^ lX8 ^ lY8);
+            }
+        } else {
+            return (lResult ^ lX8 ^ lY8);
+        }
+    }
+
+    function F(x, y, z) {
+        return (x & y) | ((~x) & z);
+    }
+
+    function G(x, y, z) {
+        return (x & z) | (y & (~z));
+    }
+
+    function H(x, y, z) {
+        return (x ^ y ^ z);
+    }
+
+    function I(x, y, z) {
+        return (y ^ (x | (~z)));
+    }
+
+    function FF(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(F(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    };
+
+    function GG(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(G(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    };
+
+    function HH(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(H(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    };
+
+    function II(a, b, c, d, x, s, ac) {
+        a = AddUnsigned(a, AddUnsigned(AddUnsigned(I(b, c, d), x), ac));
+        return AddUnsigned(RotateLeft(a, s), b);
+    };
+
+    function ConvertToWordArray(string) {
+        var lWordCount;
+        var lMessageLength = string.length;
+        var lNumberOfWords_temp1 = lMessageLength + 8;
+        var lNumberOfWords_temp2 = (lNumberOfWords_temp1 - (lNumberOfWords_temp1 % 64)) / 64;
+        var lNumberOfWords = (lNumberOfWords_temp2 + 1) * 16;
+        var lWordArray = Array(lNumberOfWords - 1);
+        var lBytePosition = 0;
+        var lByteCount = 0;
+        while (lByteCount < lMessageLength) {
+            lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+            lBytePosition = (lByteCount % 4) * 8;
+            lWordArray[lWordCount] = (lWordArray[lWordCount] | (string.charCodeAt(lByteCount) << lBytePosition));
+            lByteCount++;
+        }
+        lWordCount = (lByteCount - (lByteCount % 4)) / 4;
+        lBytePosition = (lByteCount % 4) * 8;
+        lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
+        lWordArray[lNumberOfWords - 2] = lMessageLength << 3;
+        lWordArray[lNumberOfWords - 1] = lMessageLength >>> 29;
+        return lWordArray;
+    };
+
+    function WordToHex(lValue) {
+        var WordToHexValue = "", WordToHexValue_temp = "", lByte, lCount;
+        for (lCount = 0; lCount <= 3; lCount++) {
+            lByte = (lValue >>> (lCount * 8)) & 255;
+            WordToHexValue_temp = "0" + lByte.toString(16);
+            WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
+        }
+        return WordToHexValue;
+    };
+
+    function Utf8Encode(string) {
+        string = string.replace(/\r\n/g, "\n");
+        var utftext = "";
+
+        for (var n = 0; n < string.length; n++) {
+
+            var c = string.charCodeAt(n);
+
+            if (c < 128) {
+                utftext += String.fromCharCode(c);
+            }
+            else if ((c > 127) && (c < 2048)) {
+                utftext += String.fromCharCode((c >> 6) | 192);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+            else {
+                utftext += String.fromCharCode((c >> 12) | 224);
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);
+                utftext += String.fromCharCode((c & 63) | 128);
+            }
+
+        }
+
+        return utftext;
+    };
+
+    var x = Array();
+    var k, AA, BB, CC, DD, a, b, c, d;
+    var S11 = 7, S12 = 12, S13 = 17, S14 = 22;
+    var S21 = 5, S22 = 9, S23 = 14, S24 = 20;
+    var S31 = 4, S32 = 11, S33 = 16, S34 = 23;
+    var S41 = 6, S42 = 10, S43 = 15, S44 = 21;
+
+    string = Utf8Encode(string);
+
+    x = ConvertToWordArray(string);
+
+    a = 0x67452301;
+    b = 0xEFCDAB89;
+    c = 0x98BADCFE;
+    d = 0x10325476;
+
+    for (k = 0; k < x.length; k += 16) {
+        AA = a;
+        BB = b;
+        CC = c;
+        DD = d;
+        a = FF(a, b, c, d, x[k + 0], S11, 0xD76AA478);
+        d = FF(d, a, b, c, x[k + 1], S12, 0xE8C7B756);
+        c = FF(c, d, a, b, x[k + 2], S13, 0x242070DB);
+        b = FF(b, c, d, a, x[k + 3], S14, 0xC1BDCEEE);
+        a = FF(a, b, c, d, x[k + 4], S11, 0xF57C0FAF);
+        d = FF(d, a, b, c, x[k + 5], S12, 0x4787C62A);
+        c = FF(c, d, a, b, x[k + 6], S13, 0xA8304613);
+        b = FF(b, c, d, a, x[k + 7], S14, 0xFD469501);
+        a = FF(a, b, c, d, x[k + 8], S11, 0x698098D8);
+        d = FF(d, a, b, c, x[k + 9], S12, 0x8B44F7AF);
+        c = FF(c, d, a, b, x[k + 10], S13, 0xFFFF5BB1);
+        b = FF(b, c, d, a, x[k + 11], S14, 0x895CD7BE);
+        a = FF(a, b, c, d, x[k + 12], S11, 0x6B901122);
+        d = FF(d, a, b, c, x[k + 13], S12, 0xFD987193);
+        c = FF(c, d, a, b, x[k + 14], S13, 0xA679438E);
+        b = FF(b, c, d, a, x[k + 15], S14, 0x49B40821);
+        a = GG(a, b, c, d, x[k + 1], S21, 0xF61E2562);
+        d = GG(d, a, b, c, x[k + 6], S22, 0xC040B340);
+        c = GG(c, d, a, b, x[k + 11], S23, 0x265E5A51);
+        b = GG(b, c, d, a, x[k + 0], S24, 0xE9B6C7AA);
+        a = GG(a, b, c, d, x[k + 5], S21, 0xD62F105D);
+        d = GG(d, a, b, c, x[k + 10], S22, 0x2441453);
+        c = GG(c, d, a, b, x[k + 15], S23, 0xD8A1E681);
+        b = GG(b, c, d, a, x[k + 4], S24, 0xE7D3FBC8);
+        a = GG(a, b, c, d, x[k + 9], S21, 0x21E1CDE6);
+        d = GG(d, a, b, c, x[k + 14], S22, 0xC33707D6);
+        c = GG(c, d, a, b, x[k + 3], S23, 0xF4D50D87);
+        b = GG(b, c, d, a, x[k + 8], S24, 0x455A14ED);
+        a = GG(a, b, c, d, x[k + 13], S21, 0xA9E3E905);
+        d = GG(d, a, b, c, x[k + 2], S22, 0xFCEFA3F8);
+        c = GG(c, d, a, b, x[k + 7], S23, 0x676F02D9);
+        b = GG(b, c, d, a, x[k + 12], S24, 0x8D2A4C8A);
+        a = HH(a, b, c, d, x[k + 5], S31, 0xFFFA3942);
+        d = HH(d, a, b, c, x[k + 8], S32, 0x8771F681);
+        c = HH(c, d, a, b, x[k + 11], S33, 0x6D9D6122);
+        b = HH(b, c, d, a, x[k + 14], S34, 0xFDE5380C);
+        a = HH(a, b, c, d, x[k + 1], S31, 0xA4BEEA44);
+        d = HH(d, a, b, c, x[k + 4], S32, 0x4BDECFA9);
+        c = HH(c, d, a, b, x[k + 7], S33, 0xF6BB4B60);
+        b = HH(b, c, d, a, x[k + 10], S34, 0xBEBFBC70);
+        a = HH(a, b, c, d, x[k + 13], S31, 0x289B7EC6);
+        d = HH(d, a, b, c, x[k + 0], S32, 0xEAA127FA);
+        c = HH(c, d, a, b, x[k + 3], S33, 0xD4EF3085);
+        b = HH(b, c, d, a, x[k + 6], S34, 0x4881D05);
+        a = HH(a, b, c, d, x[k + 9], S31, 0xD9D4D039);
+        d = HH(d, a, b, c, x[k + 12], S32, 0xE6DB99E5);
+        c = HH(c, d, a, b, x[k + 15], S33, 0x1FA27CF8);
+        b = HH(b, c, d, a, x[k + 2], S34, 0xC4AC5665);
+        a = II(a, b, c, d, x[k + 0], S41, 0xF4292244);
+        d = II(d, a, b, c, x[k + 7], S42, 0x432AFF97);
+        c = II(c, d, a, b, x[k + 14], S43, 0xAB9423A7);
+        b = II(b, c, d, a, x[k + 5], S44, 0xFC93A039);
+        a = II(a, b, c, d, x[k + 12], S41, 0x655B59C3);
+        d = II(d, a, b, c, x[k + 3], S42, 0x8F0CCC92);
+        c = II(c, d, a, b, x[k + 10], S43, 0xFFEFF47D);
+        b = II(b, c, d, a, x[k + 1], S44, 0x85845DD1);
+        a = II(a, b, c, d, x[k + 8], S41, 0x6FA87E4F);
+        d = II(d, a, b, c, x[k + 15], S42, 0xFE2CE6E0);
+        c = II(c, d, a, b, x[k + 6], S43, 0xA3014314);
+        b = II(b, c, d, a, x[k + 13], S44, 0x4E0811A1);
+        a = II(a, b, c, d, x[k + 4], S41, 0xF7537E82);
+        d = II(d, a, b, c, x[k + 11], S42, 0xBD3AF235);
+        c = II(c, d, a, b, x[k + 2], S43, 0x2AD7D2BB);
+        b = II(b, c, d, a, x[k + 9], S44, 0xEB86D391);
+        a = AddUnsigned(a, AA);
+        b = AddUnsigned(b, BB);
+        c = AddUnsigned(c, CC);
+        d = AddUnsigned(d, DD);
+    }
+
+    var temp = WordToHex(a) + WordToHex(b) + WordToHex(c) + WordToHex(d);
+
+    return temp.toLowerCase();
+};
